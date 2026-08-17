@@ -6,8 +6,7 @@ import (
 )
 
 func Do(parent context.Context, work func(context.Context) error) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second) // BUG
+	ctx, cancel := context.WithTimeout(parent, 5*time.Second)
 	defer cancel()
-	_ = parent
 	return work(ctx)
 }
